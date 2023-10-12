@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations: 
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
+    
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /swagger-testing-1/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: swagger-testing-1-service
+                port: 
+                  number: 3000
+          - path: /swagger-testing-2/*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: swagger-testing-2-service
+                port: 
+                  number: 3000

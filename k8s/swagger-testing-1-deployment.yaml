@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swagger-testing-1-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: swagger-testing-1
+  template:
+    metadata:
+      labels:
+        component: swagger-testing-1
+    spec:
+      containers:
+        - name: swagger-testing-1
+          image: gcr.io/development-401706/swagger-testing-1/swagger-testing-1-image:tag1
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "100m"      
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: swagger-testing-1-service
+spec:
+  type: ClusterIP
+  selector:
+    component: swagger-testing-1
+  ports:
+    - port: 3000
+      targetPort: 3000
+      

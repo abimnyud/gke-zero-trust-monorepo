@@ -34,3 +34,4 @@ jobs:
           gcloud builds submit \
             --tag ${{ env.IMAGE_NAME }}:latest \
             ./swagger-testing-2
+            --suppress-logs

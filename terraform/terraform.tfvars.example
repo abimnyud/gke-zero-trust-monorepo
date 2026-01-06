@@ -1,0 +1,15 @@
+project_id = "your-gcp-project-id"
+region     = "us-central1"
+zone       = "us-central1-c"
+
+# GKE Cluster Configuration
+cluster_name = "zero-trust-cluster"
+machine_type = "e2-small"
+node_count   = 1
+
+# Application Images
+swagger_testing_1_image = "gcr.io/your-project-id/swagger-testing-1:latest"
+swagger_testing_2_image = "gcr.io/your-project-id/swagger-testing-2:latest"
+
+# Cloudflare Tunnel Token
+cloudflare_token = "your-sensitive-cloudflare-token"

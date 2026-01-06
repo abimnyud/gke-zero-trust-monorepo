@@ -1,0 +1,35 @@
+name: Build Swagger Testing 1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "swagger-testing-1/**"
+
+env:
+  PROJECT_ID: personal-project-2002
+  IMAGE_NAME: gcr.io/personal-project-2002/swagger-testing-1
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CLOUD_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GOOGLE_CLOUD_PROJECT_ID }}
+
+      - name: Submit Build to Cloud Build
+        run: |
+          gcloud builds submit \
+            --tag ${{ env.IMAGE_NAME }}:latest \
+            ./swagger-testing-1

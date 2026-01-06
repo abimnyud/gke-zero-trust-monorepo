@@ -3,7 +3,7 @@ name: Build Swagger Testing 1
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - "swagger-testing-1/**"
 
